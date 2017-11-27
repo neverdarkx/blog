@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}MapleZ{% endblock %}
+
+{% block page_content %}
+
+<main class="card-article">
+    <div class="card-body">
+        <h2 class="card-user-title">{{ user.username }}</h2>
+        <div class="card-user-info">
+            <p>Email: {{ user.email }}</p>
+            <p>{{ user.member_since.strftime("%Y年%m月%d日") + '加入了MapleZ'  }}</p>
+            <p>签名： {{ user.about_me }}</p>
+        </div>
+        <div class="card-art-body">
+        </div>
+    </div>
+
+    <footer class="card-art-footer">
+    </footer>
+</main>
+
+<section class="card-article">
+    <div class="card-body">
+        <div class="card-user-title">足迹</div>
+        {% for history in histories %}
+        <div class="history">
+            {{ history.body }}
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
+
+
+{% block info %}
+    {% include '_info.html' %}
+{% endblock %}

@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}MapleZ{% endblock %}
+
+{% block page_content %}
+{#    <div class="page-header">#}
+{#        <h1>Hello,{% if current_user.is_authenticated %}#}
+{#            {{ current_user.username }}{% else %}Stranger{% endif %}!</h1>#}
+{#    </div>#}
+{#    {% if current_user.is_authenticated %}#}
+{#    <div>#}
+{#        {{ wtf.quick_form(form) }}#}
+{#    </div>  #}
+{#{% endif %}#}
+
+<main class="card-article">
+    <div class="card-art-category">
+    {% for label in list.labels.all() %}
+        <nobr>&nbsp;&nbsp;</nobr>
+        <a href="{{ url_for('main.list_class', classify=label.body)}}">{{ label.body }}</a>
+    {% endfor %}
+        <nobr>&nbsp;&nbsp;</nobr>
+    </div>
+    <div class="card-body">
+        <h2 class="card-art-title">{{ list.title }}！</h2>
+        <div class="card-art-subtitle">{{ list.subtitle }}</div>
+        <section class="card-art-info">
+            <span>作者：<a class="text-warning" href="{{ url_for('main.user', username=list.username) }}">{{ list.username }}</a></span>
+            <datetime>&nbsp;&nbsp;{{ list.timestamp.strftime("%Y年%m月%d日") }}</datetime>
+        </section>
+
+        <div class="card-art-body">
+            {% if list.body_html %}
+                {{ list.body_html | safe }}
+            {% else %}
+                {{ list.body }}
+            {% endif %}
+        </div>
+    </div>
+
+    <footer class="card-art-footer">
+    </footer>
+</main>
+{% if current_user.username == list.username %}
+    <div class="edit">
+        <a class="btn btn-warning btn-lg" href="{{ url_for('main.edit_art', id=list.id) }}">&nbsp;编&nbsp;辑&nbsp;</a>
+    </div>
+{% endif %}
+<div>
+
+</div>
+<a name="comment"></a>
+<section>
+    <div class="card-article">
+        {% if comments %}
+        {% for comment in comments %}
+            <div class="card-comment">
+                <div class="comment-body">{{ comment.body }}</div>
+                <div class="comment-foot">{{ comment.username }}</div>
+            </div>
+        {% endfor %}
+        {% else %}
+            <div class="card-comment-none">这里冷冷清清哦</div>
+        {% endif %}
+    </div>
+    {% if current_user.is_authenticated %}
+        <form class="form-group" action="" method="post" role="form">
+                {{ form.hidden_tag() }}
+            <div class="form-group required">
+                {{ form.body(id="body", class="form-control",
+                required="", placeholder=form.body.label.text) }}
+            </div>
+            {{ form.submit(id="submit", class="btn btn-default") }}
+        </form>
+    {% else %}
+        <p>想发表高见？请先<a href="{{ url_for('auth.login') }}" >登录～</a></p>
+    {% endif %}
+
+</section>
+{% endblock %}
+
+
+{% block info %}
+    {% include '_info.html' %}
+{% endblock %}
+

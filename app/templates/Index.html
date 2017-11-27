@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% import "_macros.html" as macros %}
+
+{% block title %}MapleZ{% endblock %}
+
+{% block page_content %}
+{#    <div class="page-header">#}
+{#        <h1>Hello,{% if current_user.is_authenticated %}#}
+{#            {{ current_user.username }}{% else %}Stranger{% endif %}!</h1>#}
+{#    </div>#}
+{#    {% if current_user.is_authenticated %}#}
+{#    <div>#}
+{#        {{ wtf.quick_form(form) }}#}
+{#    </div>  #}
+{#{% endif %}#}
+    {% for list in lists %}
+        <article class="card">
+{#            <header class="card__thumb">#}
+{#                <a href="#"><img src="static/slide1.jpg"></a>#}
+{#            </header>#}
+            <date class="card__date">
+                <span class="card__date__day">{{ list.timestamp.day }}日</span>
+                <br>
+                <span class="card__date__month">{{ list.timestamp.month }}月</span>
+            </date>
+{#shurufayoubengle，zhelikaolvyong a shixianmaosibijiaohao#}
+            <div class="card__body" onclick="location.href='{{ url_for('main.article', id=list.id) }}'">
+
+                <div class="card__category">
+                    <nobr>&nbsp;&nbsp;</nobr>
+                    {% for label in list.labels.all() %}
+                        <a href="{{ url_for('main.list_class', classify=label.body)}}">{{ label.body }}</a>
+                        <nobr>&nbsp;&nbsp;</nobr>
+                    {% endfor %}
+                </div>
+
+                <h3 class="card__title"><a href="#">{{ list.title }}！</a></h3>
+                <div class="card__subtitle">{{ list.subtitle }}</div>
+                <p class="card__description">{{ list.summary }}</p>
+            </div>
+
+            <footer class="card__footer">
+                <i class="fa fa-clock-o"></i>&nbsp;&nbsp;{{ moment(list.timestamp).fromNow() }}&nbsp;&nbsp;
+                <i class="fa fa-comments"></i><a href="{{ url_for('main.article', id=list.id) + '#comment' }}"> &nbsp;{{ Comment.query.filter_by(list_id=list.id).count() }} 条评论</a>
+            </footer>
+        </article>
+    {% endfor %}
+<div class="edit">
+    <div class="pagination pagination-lg">
+            {{ macros.pagination_widget(pagination, '.index') }}
+    </div>
+</div>
+{% endblock %}
+
+
+
+{% block info %}
+    {% include '_info.html' %}
+{% endblock %}
+
+
+{#            <code>This is information about me</code>#}
+{#            <br />#}
+{#            <blockquote class="pull-left">鲁迅曾经说过:不学习就他妈的去死吧</blockquote>#}
+{#            <br />#}
+
+

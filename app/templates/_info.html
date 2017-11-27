@@ -1,0 +1,20 @@
+<div class="info">
+    <h3 class="info-title">About me</h3>
+    <p class="text-info">想当码农的垃圾，从零开始学习加哇中</p>
+</div>
+<div class="info">
+    <h3 class="info-title">Contact me</h3>
+    <a class="list-group-item" href="#"><i class="fa fa-qq fa-fw"></i>&nbsp; 178278676</a>
+    <a class="list-group-item" href="#"><i class="fa fa-github fa-fw"></i>&nbsp; neverdarkx</a>
+    <a class="list-group-item" href="www.baidu.com"><i class="fa fa-weibo fa-fw"></i>&nbsp; 今天的我也是没救了</a>
+</div>
+<div class="info">
+    <h3 class="info-title">标签</h3>
+    <a class="list-group-item text-danger" href="#"><i class="fa fa-lock fa-fw"></i>&nbsp;&nbsp;隐私</a>
+{% for label in labels %}
+    <a class="list-group-item" href="#"><i class="fa fa-search fa-fw"></i>&nbsp;&nbsp;{{ label.body }}&nbsp;({{ label.lists.count()}})</a>
+{% endfor %}
+</div>
+<div class="info">
+    <h3 class="info-title">日期</h3>
+</div>

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}MapleZ{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <h1>Login</h1>
+</div>
+<div>
+    {{ wtf.quick_form(form) }}
+</div>
+    <p>Forget your password? <a href="{{ url_for('main.index') }}">Click here to reset</a>. </p>
+    <p>New user? <a href="{{ url_for('auth.register') }}">Click here to regiser</a>.</p>
+
+{% endblock %}
