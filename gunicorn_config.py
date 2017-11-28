@@ -7,8 +7,8 @@ import multiprocessing
 debug = True
 loglevel = 'debug'
 bind = '127.0.0.1:5000'
-pidfile = 'log/gunicorn.pid'
-logfile = 'log/debug.log'
+pidfile = 'logs/gunicorn.pid'
+logfile = 'logs/debug.log'
 
 workers = multiprocessing.cpu_count() * 2 + 1
 worker_class = 'gevent'
