@@ -30,6 +30,9 @@
                      {{ form.subtitle(id="subtitle", class="form-control", required="", value=list.subtitle)}}
                  </div>
                  <div class="form-group col-md-12">
+                     {{ form.image(id="image", class="form-control", required="", value=list.image)}}
+                 </div>
+                 <div class="form-group col-md-12">
 {#                     奇了怪了，为毛不自己渲染都能正确显示，见鬼了真是。#}
                      {{ form.label(type="text", class="token-input ui-autocomplete-input", id="tokenfield", autocomplete="on", required="", placeholder=form.label.label.text, value = str) }}
                  </div>

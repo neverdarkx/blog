@@ -16,9 +16,9 @@
 {#{% endif %}#}
     {% for list in lists %}
         <article class="card">
-{#            <header class="card__thumb">#}
-{#                <a href="#"><img src="static/slide1.jpg"></a>#}
-{#            </header>#}
+            <header class="card__thumb">
+                <a href="{{ url_for('main.article', id=list.id) }}"><img src="{{ list.image }}"></a>
+            </header>
             <date class="card__date">
                 <span class="card__date__day">{{ list.timestamp.day }}日</span>
                 <br>

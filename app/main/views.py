@@ -78,6 +78,7 @@ def post():
                     subtitle=form.subtitle.data,
                     summary=form.summary.data,
                     body=form.body.data,
+                    image = form.image.data,
                     author_id=current_user.id,
                     username=current_user.username)
         # db.session.add(list)
@@ -109,6 +110,7 @@ def edit_art(id):
     if form.validate_on_submit():
         list.title = form.title.data
         list.subtitle = form.subtitle.data
+        list.image = form.image.data
         list.summary = form.summary.data
         list.body = form.body.data
         db.session.add(list)
